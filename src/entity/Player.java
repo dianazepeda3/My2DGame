@@ -23,14 +23,14 @@ public class Player extends Entity{
 		this.gp = gp;
 		this.keyH = keyH;
 		
-		screenX = gp.screenWidth/2 - ((gp.tileSize*2)/2);
-		screenY = gp.screenHeight/2 - ((gp.tileSize*2)/2);
+		screenX = gp.screenWidth/2 - ((gp.tileSize)/2);
+		screenY = gp.screenHeight/2 - ((gp.tileSize)/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 8;
-		solidArea.y = 16;
-		solidArea.height = 32;
-		solidArea.width = 32;
+		solidArea.x = 22;
+		solidArea.y = 24;
+		solidArea.height = 20;
+		solidArea.width = 5;
 		
 		setDefaultValues();
 		getPlayerImage();

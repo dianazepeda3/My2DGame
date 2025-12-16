@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -18,6 +19,7 @@ public class Player extends Entity{
 	
 	public final int screenX;
 	public final int screenY;
+	int hasKey = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -29,6 +31,8 @@ public class Player extends Entity{
 		solidArea = new Rectangle();
 		solidArea.x = 22;
 		solidArea.y = 24;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		solidArea.height = 20;
 		solidArea.width = 5;
 		
@@ -74,6 +78,10 @@ public class Player extends Entity{
 			// CHECK TILE COLLISION
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
+			
+			// CHECK OJECT COLLISION
+			int objIndex = gp.cChecker.checkObject(this, true);
+			pickUpObject(objIndex);
 			
 			// IF COLLISION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
@@ -138,5 +146,30 @@ public class Player extends Entity{
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		/*Dibujar rectángulo alrededor
+		g2.setColor(Color.RED); // Color del margen
+		g2.setStroke(new BasicStroke(3)); // Grosor de 3 pixeles	
+		g2.drawRect(screenX, screenY, gp.tileSize, gp.tileSize);*/
+	}
+	
+	public void pickUpObject(int index) {
+		if(index != 999) {
+			String objectName = gp.obj[index].name;
+			
+			switch(objectName) {
+			case "Key":
+				hasKey++;
+				gp.obj[index] = null;
+				
+				break;
+			case "Door":
+				if(hasKey > 0) {
+					gp.obj[index] = null;
+					hasKey--;
+				}
+				break;
+			}
+			System.out.println("Key: "+hasKey);
+		}
 	}
 }

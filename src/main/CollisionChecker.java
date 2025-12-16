@@ -91,7 +91,7 @@ public class CollisionChecker {
 					break;
 				}
 				if(entity.solidArea.intersects(gp.obj[i].solidArea)){
-					System.out.println("collision!");
+					//System.out.println("collision!");
 					if(gp.obj[i].collision == true) {
 						entity.collisionOn = true;
 					}

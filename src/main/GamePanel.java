@@ -24,8 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 	
 	// WORLD SETTINGS
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public final int maxWorldCol = 67;
+	public final int maxWorldRow = 46;
 	
 	// FPS
 	int FPS = 60;
@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogueState = 3;	
+	public final int mapState = 4;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -64,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setObject();
 		aSetter.setNPC();
 		//playMusic(0);
-		gameState = titleState;
+		gameState = playState; //titleState;
 	}
 	
 	public void startGameThread() {

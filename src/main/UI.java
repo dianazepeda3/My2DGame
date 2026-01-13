@@ -78,6 +78,11 @@ public class UI {
 			drawPlayerLife();
 		}
 		
+		// MAP STATE 
+		if(gp.gameState == gp.mapState) {
+			//drawPlayerLife();
+		}
+		
 	}
 	
 	public void drawPlayerLife() {

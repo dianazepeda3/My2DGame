@@ -34,12 +34,12 @@ public class Player extends Entity{
 		screenY = gp.screenHeight/2 - ((gp.tileSize)/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 22;
-		solidArea.y = 24;
+		solidArea.x = 8;
+		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.height = 20;
-		solidArea.width = 5;
+		solidArea.height = 32;
+		solidArea.width = 32;
 			
 		
 		setDefaultValues();
@@ -47,11 +47,11 @@ public class Player extends Entity{
 	}
 	
 	public void setDefaultValues() {
-		worldX = gp.tileSize * 57;
-		worldY = gp.tileSize * 33;
+		worldX = gp.tileSize * 15;
+		worldY = gp.tileSize * 15;
 		speed = 4;
 		direction = "down";
-		tipo = "sofia";
+		tipo = "boy";
 		playerSizeX = gp.tileSize;
 		playerSizeY = gp.tileSize;
 		
@@ -165,10 +165,10 @@ public class Player extends Entity{
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, null);
-		/*Dibujar rectángulo alrededor
+		//Dibujar rectángulo alrededor
 		g2.setColor(Color.RED); // Color del margen
 		g2.setStroke(new BasicStroke(3)); // Grosor de 3 pixeles	
-		g2.drawRect(screenX, screenY, gp.tileSize, gp.tileSize);*/
+		g2.drawRect(screenX, screenY, gp.tileSize, gp.tileSize);
 	}
 	
 	public void pickUpObject(int index) {

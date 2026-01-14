@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setObject();
 		aSetter.setNPC();
 		//playMusic(0);
-		gameState = titleState;
+		gameState = playState; //titleState;
 	}
 	
 	public void startGameThread() {
@@ -164,7 +164,8 @@ public class GamePanel extends JPanel implements Runnable{
 			ui.draw(g2);
 		}else {
 			// TILE
-			tileM.draw(g2);
+			tileM.draw(g2);			
+			tileM.drawMap(g2);			
 			
 			// OBJECT
 			for(int i = 0; i< obj.length; i++) {

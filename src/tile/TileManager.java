@@ -15,7 +15,13 @@ import main.UtilityTool;
 public class TileManager {
 	GamePanel gp;
 	public Tile[] tile;
-	public int mapTileNum[][];
+	public int mapTileNum[][];	
+	
+	UtilityTool uTool = new UtilityTool();		
+	BufferedImage mapImage;
+	
+	int mapWidth;
+	int mapHeight;
 	
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
@@ -24,7 +30,9 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTitleImage();
 		//loadMap("/maps/world01.txt");
-		loadMap("/maps/central.txt");
+		loadMap("/maps/central2.txt");
+		loadMapImage();
+		
 	}
 	
 	public void getTitleImage() {
@@ -306,7 +314,7 @@ public class TileManager {
 		}
 	}
 	
-	public void draw(Graphics2D g2) {						
+	public void draw(Graphics2D g2) {			
 		int worldCol = 0;
 		int worldRow = 0;
 		while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
@@ -318,7 +326,8 @@ public class TileManager {
 			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && worldX - gp.tileSize*2 < gp.player.worldX + gp.player.screenX &&
 			   worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && worldY - gp.tileSize*2 < gp.player.worldY + gp.player.screenY) {
-				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);			
+				
 			}			
 			worldCol++;
 			
@@ -327,5 +336,51 @@ public class TileManager {
 				worldRow++;
 			}
 		}			
+	}	
+	
+	public void loadMapImage() {
+	    try {
+	        mapImage = ImageIO.read(
+	            getClass().getResourceAsStream("/menus/central2.png")
+	        );
+	   
+	        mapWidth = gp.maxWorldCol * gp.tileSize;
+	        mapHeight = gp.maxWorldRow * gp.tileSize;
+
+	        mapImage = uTool.scaleImage(mapImage, mapWidth, mapHeight);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
+
+	
+	public void drawMap(Graphics2D g2) {
+
+	    int srcX = gp.player.worldX - gp.player.screenX;
+	    int srcY = gp.player.worldY - gp.player.screenY;
+
+	    // Evitar salirnos de la imagen
+	    srcX = Math.max(0, Math.min(srcX, mapWidth - gp.screenWidth));
+	    srcY = Math.max(0, Math.min(srcY, mapHeight - gp.screenHeight));
+
+	    g2.drawImage(
+	        mapImage,
+
+	        // DESTINO (pantalla)
+	        0,
+	        0,
+	        gp.screenWidth,
+	        gp.screenHeight,
+
+	        // ORIGEN (imagen)
+	        srcX,
+	        srcY,
+	        srcX + gp.screenWidth,
+	        srcY + gp.screenHeight,
+
+	        null
+	    );
+	}
+
 }

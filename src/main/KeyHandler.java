@@ -70,16 +70,32 @@ public class KeyHandler implements KeyListener{
 				}
 				if(code == KeyEvent.VK_ENTER) {
 					if(gp.ui.commandNum == 0) {
-						System.out.println("uno");
+						System.out.println("uno");						
+						gp.player.tipo = "sofia2";
+						gp.player.playerSizeX = 40;
+						gp.player.playerSizeY = 80;
+						gp.player.getPlayerImage();						
+						System.out.println(gp.player.tipo);
 						gp.gameState = gp.playState;
 						//gp.ui.titleScreenState = 1;
-						gp.playMusic(0);
+						//gp.playMusic(0);
 					}
 					if(gp.ui.commandNum == 1) {
 						System.out.println("dos");
+						gp.player.tipo = "sofia";
+						gp.player.playerSizeX = 64;
+						gp.player.playerSizeY = 64;
+						gp.player.getPlayerImage();	
+						System.out.println(gp.player.tipo);
+						gp.gameState = gp.playState;
 					}
 					if(gp.ui.commandNum == 2) {
-						System.out.println("tres");
+						System.out.println("tres");						
+						gp.player.setDefaultValues();
+						gp.player.tipo = "boy";
+						gp.player.getPlayerImage();	
+						System.out.println(gp.player.tipo);
+						gp.gameState = gp.playState;
 					}
 					if(gp.ui.commandNum == 3) {
 						gp.ui.titleScreenState = 0;
@@ -106,6 +122,9 @@ public class KeyHandler implements KeyListener{
 			}
 			if(code == KeyEvent.VK_ENTER) {
 				enterPressed = true;				
+			}
+			if(code == KeyEvent.VK_M) {
+				gp.gameState = gp.titleState;				
 			}
 			
 			// DEBUG

@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+
 import object.OBJ_Heart;
 import object.SuperObject;
 
@@ -25,6 +27,9 @@ public class UI {
 	public String currentDialogue = "";
 	public int commandNum = 0;
 	public int titleScreenState = 0; // 0: the first screen, 1: the title screen
+		
+	UtilityTool uTool = new UtilityTool();
+	BufferedImage image = null;
 	
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -120,9 +125,19 @@ public class UI {
 		if(titleScreenState == 0) {			
 			g2.setColor(new Color(0,0,0));
 			g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+			
+			// BACKGROUND IMAGE											
+			try {
+				image = ImageIO.read(getClass().getResourceAsStream("/menus/menu2.png"));
+				image = uTool.scaleImage(image, 256, 256);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}						
+			g2.drawImage(image, 0, 0, gp.tileSize*16, gp.tileSize*12, null);
+						
 			// TITLE NAME
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
-			String text = "Blue Boy Adventure";
+			String text = "2 AÑOS DE NOSOTRAS";
 			int x = getXforCenteredText(text);		
 			int y = gp.tileSize*3;
 			
@@ -133,77 +148,76 @@ public class UI {
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
 			
-			// BLUE BOY IMAGE
+			
 			x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-			y += gp.tileSize*2;
-			g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+			y += gp.tileSize*2;			
 			
 			// MENU 
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
 			
-			text = "NEW GAME";
+			text = "NUEVO JUEGO";
 			x = getXforCenteredText(text);
 			y += gp.tileSize*3.5;
 			g2.drawString(text, x, y);
-			if(commandNum == 0) {
-				g2.drawString(">", x-gp.tileSize, y);
+			if(commandNum == 0) {				
+				printOptions(text,x,y);
 			}
 			
-			text = "LOAD GAME";
+			text = "CARGAR JUEGO";
 			x = getXforCenteredText(text);
 			y += gp.tileSize;
 			g2.drawString(text, x, y);
 			if(commandNum == 1) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);
 			}		
 			
-			text = "EXIT";
+			text = "SALIR";
 			x = getXforCenteredText(text);
 			y += gp.tileSize;
 			g2.drawString(text, x, y);
 			if(commandNum == 2) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);
 			}
 		}else if(titleScreenState == 1) {
 			// CLASS SELECTION SCREEN
 			g2.setColor(Color.white);
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD,42F));
 			
-			String text = "Select your class!";
+			String text = "Selecciona el personaje";
 			int x = getXforCenteredText(text);
 			int y = gp.tileSize*3;
 			g2.drawString(text, x, y);
 			
-			text = "Fighter";
+			text = "Sofia";
 			x = getXforCenteredText(text);
 			y += gp.tileSize*3;
 			g2.drawString(text, x, y);			
 			if(commandNum == 0) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);					
 			}
 			
-			text = "Thief";
+			text = "Diana";
 			x = getXforCenteredText(text);
 			y += gp.tileSize;
 			g2.drawString(text, x, y);			
 			if(commandNum == 1) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);			
 			}
 			
-			text = "Sercerer";
+			text = "Boy";
 			x = getXforCenteredText(text);
 			y += gp.tileSize;
 			g2.drawString(text, x, y);			
 			if(commandNum == 2) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);				
 			}
 			
-			text = "Back";
+			text = "Atrás";
 			x = getXforCenteredText(text);
 			y += gp.tileSize*2;
 			g2.drawString(text, x, y);			
 			if(commandNum == 3) {
-				g2.drawString(">", x-gp.tileSize, y);
+				printOptions(text,x,y);
 			}
 			
 		}
@@ -221,6 +235,13 @@ public class UI {
 	public void showMessage(String text) {
 		message = text;
 		messageOn = true;
+	}
+	
+	public void printOptions(String text, int x, int y) {
+		g2.setColor(Color.yellow);
+		g2.drawString(text, x, y);				
+		g2.drawString(">", x-gp.tileSize, y);	
+		g2.setColor(Color.white);
 	}
 	
 	public void drawDialogueScreen() {

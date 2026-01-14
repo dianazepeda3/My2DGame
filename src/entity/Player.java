@@ -15,11 +15,14 @@ import main.UtilityTool;
 
 public class Player extends Entity{
 	KeyHandler keyH;
-	String tipo = "boy";
+	public String tipo;
 	
 	public final int screenX;
 	public final int screenY;
 	int standCounter = 0;
+	
+	public int playerSizeX;
+	public int playerSizeY;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -37,6 +40,7 @@ public class Player extends Entity{
 		solidAreaDefaultY = solidArea.y;
 		solidArea.height = 20;
 		solidArea.width = 5;
+			
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -47,6 +51,9 @@ public class Player extends Entity{
 		worldY = gp.tileSize * 33;
 		speed = 4;
 		direction = "down";
+		tipo = "sofia";
+		playerSizeX = gp.tileSize;
+		playerSizeY = gp.tileSize;
 		
 		// PLAYER STATUS
 		maxLife = 6;
@@ -61,7 +68,7 @@ public class Player extends Entity{
 		left1 = setup("/player/"+tipo+"_left_1");
 		left2 = setup("/player/"+tipo+"_left_2");
 		right1 = setup("/player/"+tipo+"_right_1");
-		right2 = setup("/player/"+tipo+"_right_2");
+		right2 = setup("/player/"+tipo+"_right_2");		
 	}	
 	
 	public void update() {
@@ -178,5 +185,19 @@ public class Player extends Entity{
 			}			
 		}
 		gp.keyH.enterPressed = false;
+	}
+	
+	public BufferedImage setup(String imagePath) {
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+			image = uTool.scaleImage(image, playerSizeX, playerSizeY);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return image;
 	}
 }

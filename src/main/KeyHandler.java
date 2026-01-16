@@ -62,7 +62,7 @@ public class KeyHandler implements KeyListener{
 					}
 				}
 				if(code == KeyEvent.VK_S) {
-					if(gp.ui.commandNum == 3) {
+					if(gp.ui.commandNum == 2) {
 						gp.ui.commandNum = 0;
 					} else {
 						gp.ui.commandNum++;
@@ -72,7 +72,7 @@ public class KeyHandler implements KeyListener{
 					if(gp.ui.commandNum == 0) {
 						System.out.println("uno");						
 						gp.player.tipo = "sofia2";
-						gp.player.playerSizeX = 40;
+						gp.player.playerSizeX = 50;
 						gp.player.playerSizeY = 80;
 						gp.player.getPlayerImage();						
 						System.out.println(gp.player.tipo);
@@ -82,22 +82,26 @@ public class KeyHandler implements KeyListener{
 					}
 					if(gp.ui.commandNum == 1) {
 						System.out.println("dos");
-						gp.player.tipo = "sofia";
-						gp.player.playerSizeX = 64;
-						gp.player.playerSizeY = 64;
+						gp.player.tipo = "diana";
+						gp.player.playerSizeX = 50;
+						gp.player.playerSizeY = 80;
 						gp.player.getPlayerImage();	
 						System.out.println(gp.player.tipo);
 						gp.gameState = gp.playState;
+						/*
+						 * gp.player.tipo = "sofia";
+						gp.player.playerSizeX = 64;
+						gp.player.playerSizeY = 64;*/
 					}
-					if(gp.ui.commandNum == 2) {
+					/*if(gp.ui.commandNum == 2) {
 						System.out.println("tres");						
 						gp.player.setDefaultValues();
 						gp.player.tipo = "boy";
 						gp.player.getPlayerImage();	
 						System.out.println(gp.player.tipo);
 						gp.gameState = gp.playState;
-					}
-					if(gp.ui.commandNum == 3) {
+					}*/
+					if(gp.ui.commandNum == 2) {
 						gp.ui.commandNum = 0;
 						gp.ui.titleScreenState = 0;
 					}

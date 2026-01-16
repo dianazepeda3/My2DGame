@@ -129,7 +129,7 @@ public class UI {
 			// BACKGROUND IMAGE											
 			try {
 				image = ImageIO.read(getClass().getResourceAsStream("/menus/menu2.png"));
-				image = uTool.scaleImage(image, 256, 256);
+				image = uTool.scaleImage(image, 1024, 1024);
 			}catch(IOException e) {
 				e.printStackTrace();
 			}						
@@ -195,28 +195,43 @@ public class UI {
 			if(commandNum == 0) {
 				printOptions(text,x,y);					
 			}
+			try {				
+				image = ImageIO.read(getClass().getResourceAsStream("/player/sofia_cabeza.png"));
+				image = uTool.scaleImage(image, 1024, 1024);	
+				g2.drawImage(image, x-gp.tileSize*3-8, y-35, gp.tileSize+5, gp.tileSize+5, null);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}									
 			
 			text = "Diana";
 			x = getXforCenteredText(text);
-			y += gp.tileSize;
+			y += gp.tileSize+15;
 			g2.drawString(text, x, y);			
 			if(commandNum == 1) {
 				printOptions(text,x,y);			
 			}
 			
-			text = "Boy";
+			try {				
+				image = ImageIO.read(getClass().getResourceAsStream("/player/diana_cabeza.png"));
+				image = uTool.scaleImage(image, 1024, 1024);	
+				g2.drawImage(image, x-gp.tileSize*3, y-35, gp.tileSize, gp.tileSize, null);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}	
+			
+			/*text = "Boy";
 			x = getXforCenteredText(text);
 			y += gp.tileSize;
 			g2.drawString(text, x, y);			
 			if(commandNum == 2) {
 				printOptions(text,x,y);				
-			}
+			}*/
 			
 			text = "Atrás";
 			x = getXforCenteredText(text);
 			y += gp.tileSize*2;
 			g2.drawString(text, x, y);			
-			if(commandNum == 3) {
+			if(commandNum == 2) {
 				printOptions(text,x,y);
 			}
 			

@@ -51,9 +51,9 @@ public class Player extends Entity{
 		worldY = gp.tileSize * 15;
 		speed = 4;
 		direction = "down";
-		tipo = "boy";
-		playerSizeX = gp.tileSize;
-		playerSizeY = gp.tileSize;
+		tipo = "sofia2"; //"boy";
+		playerSizeX = 50;// gp.tileSize;
+		playerSizeY = 80;//gp.tileSize;
 		
 		// PLAYER STATUS
 		maxLife = 6;
@@ -68,7 +68,11 @@ public class Player extends Entity{
 		left1 = setup("/player/"+tipo+"_left_1");
 		left2 = setup("/player/"+tipo+"_left_2");
 		right1 = setup("/player/"+tipo+"_right_1");
-		right2 = setup("/player/"+tipo+"_right_2");		
+		right2 = setup("/player/"+tipo+"_right_2");				
+		left3 = setup("/player/"+tipo+"_left_3");
+		right3 = setup("/player/"+tipo+"_right_3");
+		down3 = setup("/player/"+tipo+"_down_3");
+		up3 = setup("/player/"+tipo+"_up_3");		
 	}	
 	
 	public void update() {
@@ -111,6 +115,10 @@ public class Player extends Entity{
 				if(spriteNum == 1) {
 					spriteNum = 2;
 				}else if(spriteNum == 2) {
+					spriteNum = 3;
+				}else if(spriteNum == 3) {
+					spriteNum = 4;
+				}else if(spriteNum == 4) {
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
@@ -135,40 +143,52 @@ public class Player extends Entity{
 			if(spriteNum == 1) {
 				image = up1;
 			}
-			if(spriteNum == 2) {
+			if(spriteNum == 2 || spriteNum == 4) {
 				image = up2;
-			}			
+			}	
+			if(spriteNum == 3) {
+				image = up3;
+			}
 			break;
 		case "down":
 			if(spriteNum == 1) {
 				image = down1;
 			}
-			if(spriteNum == 2) {
+			if(spriteNum == 2 || spriteNum == 4) {
 				image = down2;
+			}
+			if(spriteNum == 3) {
+				image = down3;
 			}
 			break;
 		case "left":			
 			if(spriteNum == 1) {
 				image = left1;
 			}
-			if(spriteNum == 2) {
+			if(spriteNum == 2 || spriteNum == 4) {
 				image = left2;
+			}
+			if(spriteNum == 3) {
+				image = left3;
 			}
 			break;
 		case "right":
 			if(spriteNum == 1) {
 				image = right1;
 			}
-			if(spriteNum == 2) {
+			if(spriteNum == 2 || spriteNum == 4) {
 				image = right2;
+			}
+			if(spriteNum == 3) {
+				image = right3;
 			}
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, null);
-		//Dibujar rectángulo alrededor
+		/*Dibujar rectángulo alrededor
 		g2.setColor(Color.RED); // Color del margen
 		g2.setStroke(new BasicStroke(3)); // Grosor de 3 pixeles	
-		g2.drawRect(screenX, screenY, gp.tileSize, gp.tileSize);
+		g2.drawRect(screenX, screenY, gp.tileSize, gp.tileSize);*/
 	}
 	
 	public void pickUpObject(int index) {

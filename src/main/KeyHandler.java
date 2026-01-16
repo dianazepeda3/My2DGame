@@ -146,6 +146,33 @@ public class KeyHandler implements KeyListener{
 			if(code == KeyEvent.VK_P) {
 				gp.gameState = gp.playState;
 			}
+			if(code == KeyEvent.VK_W) {
+				if(gp.ui.commandNum == 0) {
+					gp.ui.commandNum = 2;
+				} else {
+					gp.ui.commandNum--;
+				}
+			}
+			if(code == KeyEvent.VK_S) {
+				if(gp.ui.commandNum == 2) {
+					gp.ui.commandNum = 0;
+				} else {
+					gp.ui.commandNum++;
+				}
+			}
+			if(code == KeyEvent.VK_ENTER) {
+				if(gp.ui.commandNum == 0) {
+					gp.gameState = gp.playState;
+				}
+				if(gp.ui.commandNum == 1) {
+					gp.gameState = gp.titleState;
+					gp.ui.titleScreenState = 1;
+				}
+				if(gp.ui.commandNum == 2) {
+					gp.gameState = gp.titleState;
+					gp.ui.titleScreenState = 0;
+				}
+			}
 		}		
 		// DIALOGUE STATE
 		else if(gp.gameState == gp.dialogueState) {

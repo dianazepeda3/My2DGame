@@ -240,11 +240,47 @@ public class UI {
 	
 	public void drawPauseScreen() {
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
-		String text = "PAUSED";
-		int x = getXforCenteredText(text);		
-		int y = gp.screenHeight/2;
+		String text = "PAUSA";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize*3;
+		
+		int width = gp.screenWidth - (gp.tileSize*5);
+		int height = gp.tileSize*10;
+		drawSubWindow(gp.tileSize*2+24,  gp.tileSize, width, height);
 		
 		g2.drawString(text, x, y);
+	
+		// CLASS SELECTION SCREEN
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD,42F));			
+							
+					
+		text = "Reanudar";
+		x = getXforCenteredText(text);
+		y += gp.tileSize*3;
+		g2.drawString(text, x, y);			
+		if(commandNum == 0) {
+			printOptions(text,x,y);					
+		}
+										
+		
+		text = "Cambiar personaje";
+		x = getXforCenteredText(text);
+		y += gp.tileSize+15;
+		g2.drawString(text, x, y);			
+		if(commandNum == 1) {
+			printOptions(text,x,y);			
+		}
+				
+		
+		text = "Menú principal";
+		x = getXforCenteredText(text);
+		y += gp.tileSize*2;
+		g2.drawString(text, x, y);			
+		if(commandNum == 2) {
+			printOptions(text,x,y);
+		}
+			
 	}
 	
 	public void showMessage(String text) {

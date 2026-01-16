@@ -74,15 +74,14 @@ public class UI {
 		
 		// DIALOGUE STATE
 		if(gp.gameState == gp.dialogueState) {
-			drawDialogueScreen();
 			drawPlayerLife();
+			drawDialogueScreen();			
 		}
 		
 	}
 	
 	public void drawPlayerLife() {
-		
-		gp.player.life = 5;
+				
 		int x = gp.tileSize/2;
 		int y = gp.tileSize/2;
 		int i = 0;

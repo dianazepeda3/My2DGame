@@ -31,12 +31,12 @@ public class Player extends Entity{
 		screenY = gp.screenHeight/2 - ((gp.tileSize)/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 22;
-		solidArea.y = 24;
+		solidArea.x = 8;
+		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.height = 20;
-		solidArea.width = 5;
+		solidArea.height = 32;
+		solidArea.width = 32;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -66,7 +66,7 @@ public class Player extends Entity{
 	
 	public void update() {
 		
-		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {						
+		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {						
 			if(keyH.upPressed == true) {
 				direction = "up";
 			}else if(keyH.downPressed == true) {
@@ -88,6 +88,11 @@ public class Player extends Entity{
 			// CHECK NPC COLLISION
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
+			
+			// CHECK EVENT
+			gp.eHandler.checkEvent();
+			
+			gp.keyH.enterPressed = false;
 			
 			// IF COLLISION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
@@ -176,7 +181,6 @@ public class Player extends Entity{
 				gp.gameState = gp.dialogueState;
 				gp.npc[i].speak();				
 			}			
-		}
-		gp.keyH.enterPressed = false;
+		}		
 	}
 }

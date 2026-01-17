@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import object.OBJ_Heart;
-import object.SuperObject;
+import entity.Entity;
 
 public class UI {
 	GamePanel gp;
@@ -42,7 +42,7 @@ public class UI {
 		}
 		
 		// CREATE HUD OBJECT
-		SuperObject heart = new OBJ_Heart(gp);
+		Entity heart = new OBJ_Heart(gp);
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;

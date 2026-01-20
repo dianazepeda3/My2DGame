@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -172,7 +173,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		// DEBUG
 		long drawStart = 0;		
-		if(keyH.checkDrawTime == true) {
+		if(keyH.showDebugText == true) {
 			drawStart = System.nanoTime();
 		}
 		
@@ -229,12 +230,20 @@ public class GamePanel extends JPanel implements Runnable{
 		}			
 		
 		// DEBUG
-		if(keyH.checkDrawTime == true) {
+		if(keyH.showDebugText == true) {
 			long drawEnd = System.nanoTime();
 			long passed = drawEnd - drawStart;	
+			g2.setFont(new Font("Arial", Font.PLAIN,20));
 			g2.setColor(Color.white);
-			g2.drawString("Draw Time: "+passed, 10, 400);
-			System.out.println("Draw Time: "+passed);
+			int x = 10;
+			int y = 400;
+			int lineHeight = 20;
+			
+			g2.drawString("WoldX: "+player.worldX, x, y); y += lineHeight;
+			g2.drawString("WoldY: "+player.worldY, x, y); y += lineHeight;
+			g2.drawString("Col: "+ (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
+			g2.drawString("Row: "+ (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+			g2.drawString("Draw Time: "+passed, x, y);			
 		}		
 		
 		g2.dispose();
